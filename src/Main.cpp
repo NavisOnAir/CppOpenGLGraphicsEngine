@@ -19,7 +19,7 @@ int main(int argc, char** argv) {
 	SDL_GL_SetAttribute(SDL_GL_ALPHA_SIZE, 8);
 	SDL_GL_SetAttribute(SDL_GL_BUFFER_SIZE, 32);
 	SDL_GL_SetAttribute(SDL_GL_DOUBLEBUFFER, 1);
-	SDL_GL_SetSwapInterval(1); // 0 = kein vsync; 1 = vsync; -1 = adaptive sync
+	SDL_GL_SetSwapInterval(-1); // 0 = kein vsync; 1 = vsync; -1 = adaptive sync
 
 #ifdef _DEBUG
 	SDL_GL_SetAttribute(SDL_GL_CONTEXT_FLAGS, SDL_GL_CONTEXT_DEBUG_FLAG);
@@ -115,6 +115,7 @@ int main(int argc, char** argv) {
 		delta = ((float32)counterElapsed) / (float32)perfCounterFrequency;
 		uint32 FPS = (uint32)((float32)perfCounterFrequency / (float32)counterElapsed);
 		lastCounter = endCounter;
+		gameEngine.textRend.renderText(std::to_string(FPS), 0, gameEngine.getScreenHeight() * 0.9f, 1.0f, glm::vec3(0.0f, 0.0f, 0.0f));
 
 		SDL_GL_SwapWindow(window);
 	}
